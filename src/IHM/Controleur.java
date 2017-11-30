@@ -56,7 +56,7 @@ public class Controleur {
         this.insererTexte = new InsererTexte(this.moteurEdition, this);
         this.selectionnerTexte = new SelectionnerTexte(this.moteurEdition, this);
         concreteEnregistreur = new ConcreteEnregistreur();
-        commandeEnregistrableInsererText = new CommandeEnregistrableInsererText();
+        commandeEnregistrableInsererText = new CommandeEnregistrableInsererText(this.moteurEdition, this.concreteEnregistreur, this);
 
         buttonCouper.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -101,7 +101,7 @@ public class Controleur {
                 moteurEdition.getBuffer().setCurseur(curseur);
                 invoker = new InvokerImplementation(insererTexte);
                 invoker.InvokeCommande();
-                if(concreteEnregistreur.isStartLoading())
+                if(concreteEnregistreur.isRecording())
                 {
 
                 }
@@ -118,7 +118,7 @@ public class Controleur {
                 textEdit.positionCaret(moteurEdition.getBuffer().getCurseur());
                 textEdit.setText(moteurEdition.getBuffer().getZoneTexte());
 
-                if(concreteEnregistreur.isStartLoading())
+                if(concreteEnregistreur.isRecording())
                 {
 
                 }
@@ -137,7 +137,7 @@ public class Controleur {
                 moteurEdition.getBuffer().setCurseur(curseur);
                 invoker = new InvokerImplementation(commande);
                 invoker.InvokeCommande();
-                if(concreteEnregistreur.isStartLoading())
+                if(concreteEnregistreur.isRecording())
                 {
 
                 }
@@ -155,7 +155,7 @@ public class Controleur {
                 invoker.InvokeCommande();
                 textEdit.positionCaret(moteurEdition.getBuffer().getCurseur());
                 textEdit.setText(moteurEdition.getBuffer().getZoneTexte());
-                if(concreteEnregistreur.isStartLoading())
+                if(concreteEnregistreur.isRecording())
                 {
 
                 }
@@ -227,7 +227,7 @@ public class Controleur {
         setFinSelection(textEdit.getSelection().getEnd());
         invoker = new InvokerImplementation(selectionnerTexte);
         invoker.InvokeCommande();
-        if(concreteEnregistreur.isStartLoading())
+        if(concreteEnregistreur.isRecording())
         {
 
         }
