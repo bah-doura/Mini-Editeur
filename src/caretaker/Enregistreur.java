@@ -8,5 +8,9 @@ public interface Enregistreur {
 
     public void arreter();
     public void demarrerEnregistrement();
-    public Pair<Memento, Commande> rejouer(int index);
+    public boolean isReplay();
+    public boolean isRecording();
+    public void addMemento(Memento memento, Commande commande);
+    public Memento getCurrentMemento();
+    public void rejouer();
 }

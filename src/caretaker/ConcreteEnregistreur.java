@@ -5,17 +5,24 @@ import javafx.util.Pair;
 import mementos.Memento;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class ConcreteEnregistreur implements Enregistreur {
 
-    private boolean startLoading;
+    private boolean recording;
+
+    private boolean replay;
 
     private ArrayList<Pair<Memento, Commande>> saveCommandes;
+
+    private int index;
 
     public ConcreteEnregistreur()
     {
         this.saveCommandes = new ArrayList<>();
-        this.startLoading = false;
+        this.recording = false;
+        this.replay = false;
+        this.index = 0;
     }
 
     public void addMemento(Memento memento, Commande commande) {
@@ -31,22 +38,35 @@ public class ConcreteEnregistreur implements Enregistreur {
 
     @Override
     public void arreter() {
-        this.startLoading = false;
+        this.recording = false;
     }
 
     @Override
     public void demarrerEnregistrement() {
-        this.startLoading = true;
+        this.recording = true;
     }
 
     @Override
-    public Pair<Memento, Commande> rejouer(int index) {
-
-        return this.saveCommandes.get(index);
+    public void rejouer() {
+        Iterator<Pair<Memento, Commande>> it = this.saveCommandes.iterator();
+        while(it.hasNext()){
+            this.index++;
+            it.next().getValue().execute();
+        }
+        index = 0;
     }
 
-    public boolean isStartLoading() {
-        return startLoading;
+    @Override
+    public Memento getCurrentMemento(){
+        return this.saveCommandes.get(index).getKey();
+    }
+
+    public boolean isRecording() {
+        return recording;
+    }
+
+    public boolean isReplay() {
+        return replay;
     }
 
 
