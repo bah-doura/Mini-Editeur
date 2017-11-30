@@ -12,6 +12,6 @@ public class Rejouer implements Commande {
     }
     @Override
     public void execute() {
-        concreteEnregistreur.rejouer(0);
+        concreteEnregistreur.rejouer();
     }
 }
