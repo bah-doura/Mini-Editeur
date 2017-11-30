@@ -13,7 +13,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import moteurEdition.MoteurEditionImplementation;
-import originators.CommandeEnregistrableInsererText;
+import originators.*;
 
 public class Controleur {
 
@@ -29,8 +29,9 @@ public class Controleur {
     private boolean testColler = false;
     private InsererTexte insererTexte;
     private SelectionnerTexte selectionnerTexte;
+    private CommandeEnregistrableSelectionner selectionnerTexteEnregistrable;
     private ConcreteEnregistreur concreteEnregistreur;
-    private CommandeEnregistrableInsererText commandeEnregistrableInsererText;
+    private CommandeEnregistrableInsererText insererTexteEnregistrable;
     @FXML
     private TextArea textEdit;
     @FXML
@@ -53,17 +54,24 @@ public class Controleur {
     {
 
         this.moteurEdition = new MoteurEditionImplementation();
+        concreteEnregistreur = new ConcreteEnregistreur();
         this.insererTexte = new InsererTexte(this.moteurEdition, this);
         this.selectionnerTexte = new SelectionnerTexte(this.moteurEdition, this);
-        concreteEnregistreur = new ConcreteEnregistreur();
-        commandeEnregistrableInsererText = new CommandeEnregistrableInsererText(this.moteurEdition, this.concreteEnregistreur, this);
+        this.selectionnerTexteEnregistrable = new CommandeEnregistrableSelectionner(this.moteurEdition, this.concreteEnregistreur,this);
+        this.insererTexteEnregistrable = new CommandeEnregistrableInsererText(this.moteurEdition, this.concreteEnregistreur, this);
 
         buttonCouper.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 if(!testCouper())
                 {
-                    commande = new Couper(moteurEdition);
+                    if(concreteEnregistreur.isRecording())
+                    {
+                        commande = new CommandeEnregistrableCouper(moteurEdition, concreteEnregistreur);
+                    }
+                    else{
+                        commande = new Couper(moteurEdition);
+                    }
                     selectionner();
                     testCouper = true;
                     curseur = textEdit.getCaretPosition();
@@ -81,66 +89,72 @@ public class Controleur {
         textEdit.textProperty().addListener(new ChangeListener<String>() {
         @Override
         public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
-            curseur = textEdit.getCaretPosition();
-            textEdit.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
-                @Override
-                public void handle(KeyEvent event) {
-                    if (event.getCode().equals(KeyCode.BACK_SPACE) && !textEdit.getText().equals("") ){
-                       testEffacer = true;
+            if(!concreteEnregistreur.isReplay()){
+                curseur = textEdit.getCaretPosition();
+                textEdit.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
+                    @Override
+                    public void handle(KeyEvent event) {
+                        if (event.getCode().equals(KeyCode.BACK_SPACE) && !textEdit.getText().equals("") ){
+                            testEffacer = true;
 
+                        }
+                        if(textEdit.getText().equals(""))
+                        {
+                            textEdit.positionCaret(0);
+                        }
                     }
-                    if(textEdit.getText().equals(""))
+                });
+                if (!testEffacer && !testCouper && !testColler){
+                    curseur = textEdit.getCaretPosition();
+                    setText(newValue.substring(curseur, curseur+1));
+                    moteurEdition.getBuffer().setCurseur(curseur);
+                    if(concreteEnregistreur.isRecording())
+                    { invoker = new InvokerImplementation(insererTexteEnregistrable);
+                    }
+                    else{
+                        invoker = new InvokerImplementation(insererTexte);
+                    }
+                    invoker.InvokeCommande();
+                    textEdit.positionCaret(moteurEdition.getBuffer().getCurseur());
+                    textEdit.setText(moteurEdition.getBuffer().getZoneTexte());
+                }
+                else if(testEffacer &&  curseur > 0){
+                    if(concreteEnregistreur.isRecording())
                     {
-                        textEdit.positionCaret(0);
+                        commande = new CommandeEnregistrableEffacer(moteurEdition, concreteEnregistreur);
                     }
+                    else{
+                        commande = new Effacer(moteurEdition);
+                    }
+                    curseur = textEdit.getCaretPosition();
+                    moteurEdition.getBuffer().setCurseur(curseur);
+                    invoker = new InvokerImplementation(commande);
+                    invoker.InvokeCommande();
+                    testEffacer = true;
+                    textEdit.positionCaret(moteurEdition.getBuffer().getCurseur());
+                    textEdit.setText(moteurEdition.getBuffer().getZoneTexte());
                 }
-            });
-            if (!testEffacer && !testCouper && !testColler){
-                curseur = textEdit.getCaretPosition();
-                setText(newValue.substring(curseur, curseur+1));
-                moteurEdition.getBuffer().setCurseur(curseur);
-                invoker = new InvokerImplementation(insererTexte);
-                invoker.InvokeCommande();
-                if(concreteEnregistreur.isRecording())
-                {
-
-                }
-                textEdit.positionCaret(moteurEdition.getBuffer().getCurseur());
-                textEdit.setText(moteurEdition.getBuffer().getZoneTexte());
+                testEffacer = false;
+                testCouper = false;
+                testColler = false;
             }
-            else if(testEffacer &&  curseur > 0){
-                commande = new Effacer(moteurEdition);
-                curseur = textEdit.getCaretPosition();
-                moteurEdition.getBuffer().setCurseur(curseur);
-                invoker = new InvokerImplementation(commande);
-                invoker.InvokeCommande();
-                testEffacer = true;
-                textEdit.positionCaret(moteurEdition.getBuffer().getCurseur());
-                textEdit.setText(moteurEdition.getBuffer().getZoneTexte());
-
-                if(concreteEnregistreur.isRecording())
-                {
-
-                }
-            }
-            testEffacer = false;
-            testCouper = false;
-            testColler = false;
         }
     });
         buttonCopier.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 selectionner();
-                commande = new Copier(moteurEdition);
+                if(concreteEnregistreur.isRecording())
+                {
+                    commande = new CommandeEnregistrableCopier(concreteEnregistreur, moteurEdition);
+                }
+                else{
+                    commande = new Copier(moteurEdition);
+                }
                 curseur = textEdit.getCaretPosition();
                 moteurEdition.getBuffer().setCurseur(curseur);
                 invoker = new InvokerImplementation(commande);
                 invoker.InvokeCommande();
-                if(concreteEnregistreur.isRecording())
-                {
-
-                }
             }
         });
 
@@ -148,18 +162,19 @@ public class Controleur {
             @Override
             public void handle(ActionEvent event) {
                 testColler = true;
-                commande = new Coller(moteurEdition);
+                if(concreteEnregistreur.isRecording())
+                {
+                    commande = new CommandeEnregistrableColler(moteurEdition, concreteEnregistreur);
+                }
+                else{
+                    commande = new Coller(moteurEdition);
+                }
                 curseur = textEdit.getCaretPosition();
                 moteurEdition.getBuffer().setCurseur(curseur);
                 invoker = new InvokerImplementation(commande);
                 invoker.InvokeCommande();
                 textEdit.positionCaret(moteurEdition.getBuffer().getCurseur());
                 textEdit.setText(moteurEdition.getBuffer().getZoneTexte());
-                if(concreteEnregistreur.isRecording())
-                {
-
-                }
-
             }
         });
 
@@ -178,6 +193,17 @@ public class Controleur {
                 commande = new Arreter(concreteEnregistreur);
                 invoker = new InvokerImplementation(commande);
                 invoker.InvokeCommande();
+            }
+        });
+
+        buttonRejouer.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                commande = new Rejouer(concreteEnregistreur);
+                invoker = new InvokerImplementation(commande);
+                invoker.InvokeCommande();
+                textEdit.setText(moteurEdition.getBuffer().getZoneTexte());
+                concreteEnregistreur.setReplay(false);
             }
         });
 
@@ -225,12 +251,16 @@ public class Controleur {
     {
         setDebutSelection(textEdit.getSelection().getStart());
         setFinSelection(textEdit.getSelection().getEnd());
-        invoker = new InvokerImplementation(selectionnerTexte);
-        invoker.InvokeCommande();
         if(concreteEnregistreur.isRecording())
         {
-
+            invoker = new InvokerImplementation(selectionnerTexteEnregistrable);
         }
+        else{
+            invoker = new InvokerImplementation(selectionnerTexte);
+        }
+        invoker.InvokeCommande();
+
+
     }
 
 
