@@ -11,7 +11,7 @@ public class CommandeEnregistrableEffacer implements Enregistrable, Commande {
     private MoteurEdition moteurEdition;
     private Enregistreur enregistreur;
 
-    public CommandeEnregistrableEffacer(MoteurEdition moteurEdition, Enregistreur enregisteur){
+    public CommandeEnregistrableEffacer(MoteurEdition moteurEdition, Enregistreur enregistreur){
         this.moteurEdition = moteurEdition;
         this.enregistreur = enregistreur;
     }
