@@ -48,10 +48,14 @@ public class ConcreteEnregistreur implements Enregistreur {
 
     @Override
     public void rejouer() {
+        index = 0;
+        this.replay = true;
+        System.out.println("rejouer !!!");
         Iterator<Pair<Memento, Commande>> it = this.saveCommandes.iterator();
         while(it.hasNext()){
-            this.index++;
+            System.out.println("rejouer commande");
             it.next().getValue().execute();
+            this.index++;
         }
         index = 0;
     }
@@ -67,6 +71,10 @@ public class ConcreteEnregistreur implements Enregistreur {
 
     public boolean isReplay() {
         return replay;
+    }
+
+    public void setReplay(boolean bool){
+        this.replay = bool;
     }
 
 
