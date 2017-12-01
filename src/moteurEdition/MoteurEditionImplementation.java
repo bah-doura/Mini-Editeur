@@ -1,5 +1,7 @@
 package moteurEdition;
 
+import mementos.MementoMoteur;
+
 public class MoteurEditionImplementation implements MoteurEdition {
 
     private Buffer buffer;
@@ -141,6 +143,19 @@ public class MoteurEditionImplementation implements MoteurEdition {
             this.buffer.setZoneTexte(texteIntermediaire);
             this.buffer.setCurseur(curseurIntermediaire);
         }
+    }
+
+    @Override
+    public void setEtat(MementoMoteur memento) {
+        this.buffer = memento.getBuffer().getClone();
+        this.selection = memento.getSelection().getClone();
+        this.pressePapier = memento.getPressePapier().getClone();
+    }
+
+    @Override
+    public MementoMoteur getEtat() {
+        MementoMoteur memento = new MementoMoteur(this.buffer.getClone(), this.selection.getClone(), this.pressePapier.getClone());
+        return memento;
     }
 
 

@@ -26,4 +26,11 @@ public class Buffer {
     public void setZoneTexte(String zoneTexte) {
         this.zoneTexte = zoneTexte;
     }
+
+    public Buffer getClone(){
+        Buffer buffer = new Buffer();
+        buffer.setCurseur(this.getCurseur());
+        buffer.setZoneTexte(this.getZoneTexte());
+        return buffer;
+    }
 }

@@ -32,7 +32,6 @@ public class GestDefRefaire {
     }
 
     public void refaireMoteur(){
-        System.out.println("refaire");
         if(!this.refaitStack.isEmpty()){
             MementoMoteur memento = this.refaitStack.pop();
             this.moteurEdition.setEtat(memento);

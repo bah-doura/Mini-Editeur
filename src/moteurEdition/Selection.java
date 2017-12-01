@@ -34,4 +34,11 @@ public class Selection {
                 ", finSelection=" + finSelection +
                 '}';
     }
+
+    public Selection getClone() {
+        Selection selection = new Selection();
+        selection.setDebutSelection(this.getDebutSelection());
+        selection.setFinSelection(this.getFinSelection());
+        return selection;
+    }
 }

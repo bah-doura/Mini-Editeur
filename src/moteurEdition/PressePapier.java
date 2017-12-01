@@ -18,4 +18,10 @@ public class PressePapier {
     {
         return this.contenu;
     }
+
+    public PressePapier getClone() {
+        PressePapier pressePapier = new PressePapier();
+        pressePapier.copier(this.coller());
+        return pressePapier;
+    }
 }
