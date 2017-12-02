@@ -32,6 +32,9 @@ public class CommandeEnregistrableInsererText implements Enregistrable, Commande
             this.restoreFromMemento(this.enregistreur.getCurrentMemento());
         }
         this.moteurEdition.insererTexte(this.texte);
+
+        //enre
+        restoreFromMemento(enregistreur.getMemento());
     }
 
     @Override
