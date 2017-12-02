@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 
 public class MoteurEditionImplementationTest {
 
-    MoteurEditionImplementation moteurEdition;
+    private MoteurEditionImplementation moteurEdition;
 
     @Before
     public void setUp() throws Exception {
