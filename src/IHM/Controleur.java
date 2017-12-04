@@ -92,6 +92,15 @@ public class Controleur {
                         }
                     }
                 });
+                textEdit.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
+                    @Override
+                    public void handle(KeyEvent event) {
+                        if (event.getCode().equals(KeyCode.DELETE) && !textEdit.getText().equals("") ){
+                            event.consume();
+                        }
+
+                    }
+                });
                 if (!testEffacer && !testCouper && !testColler){
                     curseur = textEdit.getCaretPosition();
                     setText(newValue.substring(curseur, curseur+1));
