@@ -26,13 +26,19 @@ public class CommandeEnregistrableCouper implements Enregistrable, Commande {
      */
     @Override
     public void execute() {
-        if(this.enregistreur.isRecording()){
-            this.enregistreur.addMemento(this.storInMemento(), this);
+        try{
+            if(this.enregistreur.isRecording()){
+                this.enregistreur.addMemento(this.storInMemento(), this);
+            }
+            else if(this.enregistreur.isReplay()){
+                this.restoreFromMemento(this.enregistreur.getCurrentMemento());
+            }
+            this.moteurEdition.couper();
         }
-        else if(this.enregistreur.isReplay()){
-            this.restoreFromMemento(this.enregistreur.getCurrentMemento());
-        }
-        this.moteurEdition.couper();
+        catch(StringIndexOutOfBoundsException e){
+            System.out.println("impossible de récuprérer la selection");
+        };
+
     }
 
     /**

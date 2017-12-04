@@ -41,12 +41,18 @@ public class CommandeEnregistrableCopier implements Enregistrable, Commande {
      */
     @Override
     public void execute() {
-        if(this.enregistreur.isRecording()){
-            this.enregistreur.addMemento(this.storInMemento(), this);
+        try{
+            if(this.enregistreur.isRecording()){
+                this.enregistreur.addMemento(this.storInMemento(), this);
+            }
+            else if(this.enregistreur.isReplay()){
+                this.restoreFromMemento(this.enregistreur.getCurrentMemento());
+            }
+            this.moteurEdition.copier();
         }
-        else if(this.enregistreur.isReplay()){
-            this.restoreFromMemento(this.enregistreur.getCurrentMemento());
-        }
-        this.moteurEdition.copier();
+        catch(StringIndexOutOfBoundsException e){
+            System.out.println("impossible de récuprérer la selection");
+        };
+
     }
 }

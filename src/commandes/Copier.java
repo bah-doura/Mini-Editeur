@@ -20,6 +20,11 @@ public class Copier implements Commande {
      */
     @Override
     public void execute() {
-      this.moteurEdition.copier();
+        try{
+            this.moteurEdition.copier();
+        }
+        catch(StringIndexOutOfBoundsException e){
+            System.out.println("impossible de récuprérer la selection");
+        };
     }
 }

@@ -43,7 +43,7 @@ public class MoteurEditionImplementation implements MoteurEdition {
      * Implémentation  de la commande couper
      */
     @Override
-    public void couper() {
+    public void couper() throws StringIndexOutOfBoundsException{
 
         if(selection.getFinSelection()!= selection.getDebutSelection())
         {
@@ -77,7 +77,7 @@ public class MoteurEditionImplementation implements MoteurEdition {
      * Implémentation  de la commande Copier
      */
     @Override
-    public void copier() {
+    public void copier() throws StringIndexOutOfBoundsException {
         if(selection.getFinSelection()!= selection.getDebutSelection())
         {
             int debut, fin;
@@ -101,7 +101,7 @@ public class MoteurEditionImplementation implements MoteurEdition {
      * Implémentation  de la commande Coller
      */
     @Override
-    public void coller() {
+    public void coller() throws StringIndexOutOfBoundsException{
         int curseurIntermediaire;
         String texteIntermediaire = this.buffer.getZoneTexte().substring(0,this.buffer.getCurseur());
         texteIntermediaire = texteIntermediaire.concat(this.pressePapier.coller()) ;
@@ -116,7 +116,7 @@ public class MoteurEditionImplementation implements MoteurEdition {
      * Implémentation  de la commande InsererTexte
      */
     @Override
-    public void insererTexte(String text) {
+    public void insererTexte(String text) throws StringIndexOutOfBoundsException{
 
         String texteIntermediaire = this.buffer.getZoneTexte().substring(0,this.buffer.getCurseur());
         int curseurIntermediaire;
@@ -143,7 +143,7 @@ public class MoteurEditionImplementation implements MoteurEdition {
      * Implémentation  de la commande Effacer
      */
     @Override
-    public void effacer() {
+    public void effacer() throws StringIndexOutOfBoundsException{
 
         int curseur = this.buffer.getCurseur();
         if(curseur > 0)

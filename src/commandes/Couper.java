@@ -19,6 +19,11 @@ public class Couper implements Commande {
      */
     @Override
     public void execute() {
-        this.moteurEdition.couper();
+        try{
+            this.moteurEdition.couper();
+        }
+        catch(StringIndexOutOfBoundsException e){
+            System.out.println("impossible de récuprérer la selection");
+        };
     }
 }

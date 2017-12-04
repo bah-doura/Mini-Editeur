@@ -20,6 +20,12 @@ public class Coller implements Commande {
      */
     @Override
     public void execute() {
-       this.moteurEdition.coller();
+
+        try{
+            this.moteurEdition.coller();
+        }
+        catch(StringIndexOutOfBoundsException e){
+            System.out.println("impossible de récuprérer la selection");
+        };
     }
 }

@@ -27,13 +27,19 @@ public class CommandeEnregistrableColler implements Enregistrable, Commande {
      */
     @Override
     public void execute() {
-        if(this.enregistreur.isRecording()){
-            this.enregistreur.addMemento(storInMemento(), this);
+        try{
+            if(this.enregistreur.isRecording()){
+                this.enregistreur.addMemento(storInMemento(), this);
+            }
+            else if(this.enregistreur.isReplay()){
+                this.restoreFromMemento(enregistreur.getCurrentMemento());
+            }
+            this.moteurEdition.coller();
         }
-        else if(this.enregistreur.isReplay()){
-            this.restoreFromMemento(enregistreur.getCurrentMemento());
-        }
-        this.moteurEdition.coller();
+        catch(StringIndexOutOfBoundsException e){
+            System.out.println("impossible de récuprérer la selection");
+        };
+
     }
 
     /**
