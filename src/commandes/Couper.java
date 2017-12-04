@@ -6,12 +6,16 @@ public class Couper implements Commande {
 
     private MoteurEdition moteurEdition;
 
+    /**
+     * Constructeur
+     * @param moteurEdition MoteurEdition
+     */
     public Couper(MoteurEdition moteurEdition) {
         this.moteurEdition = moteurEdition;
     }
 
     /**
-     *    execute the command couper
+     *    Exécute la commande couper
      */
     @Override
     public void execute() {

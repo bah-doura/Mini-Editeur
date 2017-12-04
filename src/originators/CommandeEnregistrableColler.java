@@ -1,6 +1,5 @@
 package originators;
 
-import caretaker.ConcreteEnregistreur;
 import caretaker.Enregistreur;
 import commandes.Commande;
 import mementos.Memento;
@@ -12,11 +11,20 @@ public class CommandeEnregistrableColler implements Enregistrable, Commande {
     private MoteurEdition moteurEdition;
     private Enregistreur enregistreur;
 
+    /**
+     * Constructeur
+     * @param moteurEdition
+     * @param enregistreur
+     */
     public CommandeEnregistrableColler( MoteurEdition moteurEdition, Enregistreur enregistreur)
     {
         this.moteurEdition = moteurEdition;
         this.enregistreur = enregistreur;
     }
+
+    /**
+     * Exécution de la Commande CommandeEnregistrableColler
+     */
     @Override
     public void execute() {
         if(this.enregistreur.isRecording()){
@@ -28,12 +36,19 @@ public class CommandeEnregistrableColler implements Enregistrable, Commande {
         this.moteurEdition.coller();
     }
 
+    /**
+     * Crée un nouveau Memento
+     * @return
+     */
     @Override
     public Memento storInMemento() {
         return new MementoColler();
-
     }
 
+    /**
+     * Récupère le MementoColler à partir du memento en paramètre
+     * @param memento
+     */
     @Override
     public void restoreFromMemento(Memento memento) {
         MementoColler mementoColler = (MementoColler)memento;

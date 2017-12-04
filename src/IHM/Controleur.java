@@ -47,7 +47,7 @@ public class Controleur {
     @FXML
     Button buttonColler;
     /**
-     * Initialize the view
+     * Initialise la vue
      */
     @FXML
     public void initialize()
@@ -206,46 +206,73 @@ public class Controleur {
                 concreteEnregistreur.setReplay(false);
             }
         });
-
-
-
-
     }
-
+    /**
+     * Retourne le texte Courant
+     * @return
+     */
     public String getText() {
         return text;
     }
 
+    /**
+     * Défini le texte courant
+     * @param text
+     */
     public void setText(String text) {
         this.text = text;
     }
-
+    /**
+     * Retourne la position du Curseur
+     * @return
+     */
     public int getCurseur() {
         return curseur;
     }
 
+    /**
+     * Défini la position du curseur
+     * @param curseur
+     */
     public void setCurseur(int curseur) {
         this.curseur = curseur;
     }
 
+    /**
+     * Retourne le début de la sélection
+     * @return
+     */
     public int getDebutSelection() {
         return debutSelection;
     }
 
+    /**
+     * Défini le début de la sélection
+     * @param debutSelection
+     */
     public void setDebutSelection(int debutSelection) {
         this.debutSelection = debutSelection;
     }
 
+    /**
+     * Retourne la fin de la sélection
+     * @return
+     */
     public int getFinSelection() {
         return finSelection;
     }
 
+    /**
+     * Défini la fin de la sélection
+     * @param finSelection
+     */
     public void setFinSelection(int finSelection) {
         this.finSelection = finSelection;
     }
 
     /**
-     * select the text
+     * Appel de la Commande SelectionnerTexte pour sélectionner le texte
+     * à partir de debutSelection et finSelection
      */
     public void selectionner()
     {
@@ -259,15 +286,10 @@ public class Controleur {
             invoker = new InvokerImplementation(selectionnerTexte);
         }
         invoker.InvokeCommande();
-
-
     }
-
-
-
     /**
-     *  check  if start of selection is different end of selection
-     * @return boolean
+     *  Vérifie s'il y a eu sélection
+     * @return
      */
     public boolean testCouper()
     {

@@ -17,6 +17,9 @@ public class ConcreteEnregistreur implements Enregistreur {
 
     private int index;
 
+    /**
+     * Constructeur
+     */
     public ConcreteEnregistreur()
     {
         this.saveCommandes = new ArrayList<>();
@@ -25,6 +28,11 @@ public class ConcreteEnregistreur implements Enregistreur {
         this.index = 0;
     }
 
+    /**
+     * Ajoute un nouveau Memento
+     * @param memento memento à ajouter
+     * @param commande commande associée
+     */
     public void addMemento(Memento memento, Commande commande) {
         if(memento != null && memento != null)
         {
@@ -36,16 +44,25 @@ public class ConcreteEnregistreur implements Enregistreur {
         }
     }
 
+    /**
+     * Arrête l'enregistrement
+     */
     @Override
     public void arreter() {
         this.recording = false;
     }
 
+    /**
+     * Demarre l'enregistrement
+     */
     @Override
     public void demarrerEnregistrement() {
         this.recording = true;
     }
 
+    /**
+     * Rejoue les commandes
+     */
     @Override
     public void rejouer() {
         index = 0;
@@ -57,25 +74,47 @@ public class ConcreteEnregistreur implements Enregistreur {
             it.next().getValue().execute();
             this.index++;
         }
+        this.saveCommandes.clear();
         index = 0;
     }
 
+    /**
+     * Retourne le Memento situé à l'index i
+     * @return un Memento
+     */
     @Override
     public Memento getCurrentMemento(){
         return this.saveCommandes.get(index).getKey();
     }
 
+    /**
+     * Vérifie si c'est en mode enregistrement
+     * @return boolean
+     */
     public boolean isRecording() {
         return recording;
     }
 
+    /**
+     * Vérifie si c'est en mode rejouer
+     * @return boolean
+     */
     public boolean isReplay() {
         return replay;
     }
 
+    /**
+     * Met le mode enregistrement true ou false
+     * @param bool true ou false
+     */
     public void setReplay(boolean bool){
         this.replay = bool;
     }
 
-
+    /**
+     * Fonction utilisée pour les tests
+     * @return
+     */
+    public int getSize()
+    {return this.saveCommandes.size();}
 }

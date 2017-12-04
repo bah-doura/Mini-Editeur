@@ -6,13 +6,17 @@ public class Coller implements Commande {
 
     private MoteurEdition moteurEdition;
 
+    /**
+     *  Constructeur
+     * @param moteurEdition MoteurEdition
+     */
     public Coller(MoteurEdition moteurEdition)
     {
         this.moteurEdition = moteurEdition;
     }
 
     /**
-     *   execute the command coller
+     * Exécute la commande Coller
      */
     @Override
     public void execute() {

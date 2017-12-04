@@ -6,13 +6,17 @@ public class Copier implements Commande {
 
     private MoteurEdition moteurEdition;
 
+    /**
+     * Constructeur
+     * @param moteurEdition MoteurEdition
+     */
     public Copier(MoteurEdition moteurEdition)
     {
         this.moteurEdition = moteurEdition;
     }
 
     /**
-     *    execute the command copier
+     *    Exécute la commande copier
      */
     @Override
     public void execute() {

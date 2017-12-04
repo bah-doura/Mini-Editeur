@@ -6,26 +6,41 @@ public class MoteurEditionImplementation implements MoteurEdition {
     private PressePapier pressePapier;
     private Selection selection;
 
+    /**
+     * Constructeur
+     */
     public MoteurEditionImplementation(){
         this.buffer = new Buffer();
         this.pressePapier = new PressePapier();
         this.selection = new Selection();
     }
 
+    /**
+     * Retourne le Buffeur
+     * @return
+     */
     public Buffer getBuffer() {
         return buffer;
     }
 
+    /**
+     * Retourne le Presse papier
+     * @return
+     */
     public PressePapier getPressePapier() {
         return pressePapier;
     }
 
+    /**
+     * Retourne la Sélection
+     * @return
+     */
     public Selection getSelection() {
         return selection;
     }
 
     /**
-     * Implementation  of couper command
+     * Implémentation  de la commande couper
      */
     @Override
     public void couper() {
@@ -59,7 +74,7 @@ public class MoteurEditionImplementation implements MoteurEdition {
     }
 
     /**
-     * Implementation  of copier command
+     * Implémentation  de la commande Copier
      */
     @Override
     public void copier() {
@@ -83,7 +98,7 @@ public class MoteurEditionImplementation implements MoteurEdition {
     }
 
     /**
-     * Implementation  of coller command
+     * Implémentation  de la commande Coller
      */
     @Override
     public void coller() {
@@ -98,7 +113,7 @@ public class MoteurEditionImplementation implements MoteurEdition {
     }
 
     /**
-     * Implementation  of InserterTexte command
+     * Implémentation  de la commande InsererTexte
      */
     @Override
     public void insererTexte(String text) {
@@ -113,7 +128,7 @@ public class MoteurEditionImplementation implements MoteurEdition {
     }
 
     /**
-     * Implementation  of selectionnerTexte command
+     * Implémentation  de la commande SelectionnerTexte
      */
     @Override
     public void selectionnerTexte(int debutStelection, int finSelection) {
@@ -125,7 +140,7 @@ public class MoteurEditionImplementation implements MoteurEdition {
     }
 
     /**
-     * Implementation  of effacer command
+     * Implémentation  de la commande Effacer
      */
     @Override
     public void effacer() {

@@ -14,6 +14,12 @@ public class CommandeEnregistrableInsererText implements Enregistrable, Commande
     private Enregistreur enregistreur;
     private Controleur controleur;
 
+    /**
+     * Constructeur
+     * @param moteurEdition
+     * @param enregistreur
+     * @param controleur
+     */
     public CommandeEnregistrableInsererText(MoteurEdition moteurEdition, Enregistreur enregistreur, Controleur controleur)
     {
         this.controleur = controleur;
@@ -22,6 +28,9 @@ public class CommandeEnregistrableInsererText implements Enregistrable, Commande
         this.texte = "";
     }
 
+    /**
+     * Exécution de la commande CommandeEnregistrableInsererText
+     */
     @Override
     public void execute() {
         this.setTexte(controleur.getText());
@@ -34,14 +43,22 @@ public class CommandeEnregistrableInsererText implements Enregistrable, Commande
         this.moteurEdition.insererTexte(this.texte);
 
         //enre
-        restoreFromMemento(enregistreur.getMemento());
+        restoreFromMemento(enregistreur.getCurrentMemento());
     }
 
+    /**
+     * Crée un nouveau Memento à partir du texte courant
+     * @return
+     */
     @Override
     public Memento storInMemento() {
         return new MementoInsererTexte(this.texte);
     }
 
+    /**
+     * Récupère le texte contenu dans le Memento
+     * @param memento
+     */
     @Override
     public void restoreFromMemento(Memento memento) {
 
@@ -49,6 +66,10 @@ public class CommandeEnregistrableInsererText implements Enregistrable, Commande
         this.texte = mementoInsererTexte.getTexte();
     }
 
+    /**
+     * Défini le texte Courant
+     * @param texte
+     */
     public void setTexte(String texte)
     {
         this.texte = texte;

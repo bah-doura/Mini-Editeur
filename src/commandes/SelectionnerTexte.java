@@ -8,13 +8,18 @@ public class SelectionnerTexte implements Commande {
     private MoteurEdition moteurEdition;
     private Controleur controleur;
 
+    /**
+     * Constructeur
+     * @param moteurEdition MoteurEdition
+     * @param controleur Controleur
+     */
     public SelectionnerTexte(MoteurEdition moteurEdition, Controleur controleur) {
         this.moteurEdition = moteurEdition;
         this.controleur = controleur;
     }
 
     /**
-     *    execute the command selectionnerTexte
+     *    Exécute la commande SelectionnerTexte
      */
     @Override
     public void execute() {

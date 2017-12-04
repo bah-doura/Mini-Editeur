@@ -6,6 +6,10 @@ public class InvokerImplementation implements Invoker {
 
     private Commande commande;
 
+    /**
+     * Constructeur
+     * @param commande la commande à invoquer
+     */
     public InvokerImplementation(Commande commande)
     {
         this.commande = commande;
@@ -13,7 +17,7 @@ public class InvokerImplementation implements Invoker {
 
 
     /**
-     *  Invoke the commands
+     *  Invoque une Commande
      */
 
     public void InvokeCommande() {

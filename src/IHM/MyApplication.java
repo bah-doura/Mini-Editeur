@@ -22,7 +22,7 @@ public class MyApplication extends Application {
     }
 
     /**
-     * Initializes the root layout.
+     * Charge la vue
      */
     public void loadViews() {
         try {

@@ -2,19 +2,21 @@ package commandes;
 
 import moteurEdition.MoteurEdition;
 
-import java.awt.event.ComponentAdapter;
-
 public class Effacer implements Commande {
 
 
     private MoteurEdition moteurEdition;
 
+    /**
+     * Constructeur
+     * @param moteurEdition MoteurEdition
+     */
     public Effacer(MoteurEdition moteurEdition) {
         this.moteurEdition = moteurEdition;
     }
 
     /**
-     *    execute the command effacer
+     *    Exécute la commande effacer
      */
     @Override
     public void execute() {

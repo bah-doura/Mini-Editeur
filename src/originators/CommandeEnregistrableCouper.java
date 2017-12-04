@@ -11,11 +11,19 @@ public class CommandeEnregistrableCouper implements Enregistrable, Commande {
     private MoteurEdition moteurEdition;
     private Enregistreur enregistreur;
 
+    /**
+     * Constructeur
+     * @param moteurEdition
+     * @param enregistreur
+     */
     public CommandeEnregistrableCouper(MoteurEdition moteurEdition, Enregistreur enregistreur){
         this.moteurEdition = moteurEdition;
         this.enregistreur = enregistreur;
     }
 
+    /**
+     * Exécute la commande CommandeEnregistrableCouper
+     */
     @Override
     public void execute() {
         if(this.enregistreur.isRecording()){
@@ -27,6 +35,10 @@ public class CommandeEnregistrableCouper implements Enregistrable, Commande {
         this.moteurEdition.couper();
     }
 
+    /**
+     * Crée un nouveau Memento
+     * @return
+     */
     @Override
     public Memento storInMemento() {
         return new MementoCouper();
