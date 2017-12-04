@@ -88,7 +88,7 @@
          <center>
             <TextArea fx:id="textEdit" prefHeight="393.0" prefWidth="699.0" styleClass="textarea" BorderPane.alignment="CENTER">
                <font>
-                  <Font name="Impact" size="16.0" />
+                  <Font name="Linux Libertine G Display Regular" size="16.0" />
                </font></TextArea>
          </center>
          <stylesheets>
