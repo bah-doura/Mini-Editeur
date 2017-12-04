@@ -13,9 +13,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="452.0" prefWidth="757.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="IHM.Controleur">
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="IHM.Controleur">
    <children>
-      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="452.0" prefWidth="757.0">
+      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="1000.0">
          <top>
             <GridPane BorderPane.alignment="CENTER">
               <columnConstraints>
@@ -30,9 +30,10 @@
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="35.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints />
@@ -76,38 +77,19 @@
                            <GridPane.margin>
                               <Insets left="5.0" right="15.0" />
                            </GridPane.margin></Button>
-                        <Button fx:id="buttonDefaire" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="28.0" mnemonicParsing="false" prefHeight="28.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
-                           <graphic>
-                              <ImageView fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../style/arrow-undo-icon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <padding>
-                              <Insets top="15.0" />
-                           </padding>
-                           <GridPane.margin>
-                              <Insets left="5.0" />
-                           </GridPane.margin></Button>
-                        <Button fx:id="buttonRefaire" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="28.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="63.0" GridPane.columnIndex="5" GridPane.rowIndex="2">
-                           <graphic>
-                              <ImageView fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../style/arrow-redo-icon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <GridPane.margin>
-                              <Insets left="5.0" right="5.0" />
-                           </GridPane.margin></Button>
+                        <Button fx:id="buttonArreter" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="28.0" prefWidth="110.0" text="Arreter" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                        <Button fx:id="buttonRejouer" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="28.0" prefWidth="110.0" text="Rejouer" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                        <Button fx:id="buttonEnregistrer" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="28.0" prefWidth="110.0" text="Enregistrer" GridPane.columnIndex="4" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                </children>
             </GridPane>
          </top>
          <center>
-            <TextArea fx:id="textEdit" prefHeight="393.0" prefWidth="699.0" styleClass="textarea" BorderPane.alignment="CENTER" />
+            <TextArea fx:id="textEdit" prefHeight="393.0" prefWidth="699.0" styleClass="textarea" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="Impact" size="16.0" />
+               </font></TextArea>
          </center>
          <stylesheets>
             <URL value="@../style/DarkTheme.css" />
