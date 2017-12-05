@@ -17,7 +17,7 @@ public class MyApplication extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("Mini éditeur v1");
+        this.primaryStage.setTitle("Mini éditeur v2");
         loadViews();
     }
 
@@ -27,9 +27,8 @@ public class MyApplication extends Application {
     public void loadViews() {
         try {
             // Load root layout from fxml file.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MyApplication.class.getResource("/IHM/Application.fxml"));
-            rootLayout = (AnchorPane) loader.load();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/IHM/Application.fxml"));
+            rootLayout = (AnchorPane) fxmlLoader.load();
 
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
