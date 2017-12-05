@@ -84,7 +84,6 @@ public class Controleur {
                     public void handle(KeyEvent event) {
                         if (event.getCode().equals(KeyCode.BACK_SPACE) && !textEdit.getText().equals("") ){
                             testEffacer = true;
-
                         }
                         if(textEdit.getText().equals(""))
                         {
