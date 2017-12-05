@@ -155,7 +155,6 @@ public class MoteurEditionImplementation implements MoteurEdition {
             texteIntermediaire = texteIntermediaire.concat(this.buffer.getZoneTexte().substring(this.buffer.getCurseur(),this.buffer.getZoneTexte().length())) ;
             this.buffer.setZoneTexte(texteIntermediaire);
             this.buffer.setCurseur(curseurIntermediaire);
-            System.out.println("buffer suppr : " + this.buffer.getZoneTexte());
         }
     }
 
