@@ -17,7 +17,7 @@ public class MyApplication extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("Mini éditeur v1");
+        this.primaryStage.setTitle("Mini éditeur v3");
         loadViews();
     }
 
