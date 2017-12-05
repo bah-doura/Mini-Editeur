@@ -30,7 +30,8 @@
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="15.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -77,9 +78,9 @@
                            <GridPane.margin>
                               <Insets left="5.0" right="15.0" />
                            </GridPane.margin></Button>
-                        <Button fx:id="buttonArreter" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="28.0" prefWidth="110.0" text="Arreter" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-                        <Button fx:id="buttonRejouer" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="28.0" prefWidth="110.0" text="Rejouer" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-                        <Button fx:id="buttonEnregistrer" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="28.0" prefWidth="110.0" text="Enregistrer" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                        <Button fx:id="buttonArreter" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="28.0" prefWidth="110.0" text="Arreter" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                        <Button fx:id="buttonRejouer" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="28.0" prefWidth="110.0" text="Rejouer" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+                        <Button fx:id="buttonEnregistrer" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="28.0" prefWidth="110.0" text="Enregistrer" GridPane.columnIndex="5" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                </children>

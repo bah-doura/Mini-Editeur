@@ -91,10 +91,11 @@ public class Controleur {
         public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
             if(!concreteEnregistreur.isReplay()){
                 curseur = textEdit.getCaretPosition();
-                textEdit.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
+                textEdit.setOnKeyPressed(new EventHandler<KeyEvent>() {
                     @Override
                     public void handle(KeyEvent event) {
-                        if (event.getCode().equals(KeyCode.BACK_SPACE) && !textEdit.getText().equals("") ){
+                        if (event.getCode().equals(KeyCode.BACK_SPACE) && !textEdit.getText().equals("")){
+                            System.out.println("supp");
                             testEffacer = true;
 
                         }
@@ -102,18 +103,13 @@ public class Controleur {
                         {
                             textEdit.positionCaret(0);
                         }
-                    }
-                });
-
-                textEdit.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
-                    @Override
-                    public void handle(KeyEvent event) {
                         if (event.getCode().equals(KeyCode.DELETE) && !textEdit.getText().equals("") ){
-                           event.consume();
+                            event.consume();
+                            System.out.println("delete");
                         }
-
                     }
                 });
+
 
                 if (!testEffacer && !testCouper && !testColler){
                     curseur = textEdit.getCaretPosition();
@@ -217,6 +213,7 @@ public class Controleur {
                 concreteEnregistreur.setReplay(false);
             }
         });
+
     }
     /**
      * Retourne le texte Courant
