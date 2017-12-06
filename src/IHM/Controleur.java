@@ -86,12 +86,11 @@ public class Controleur {
             }
         });
 
-        textEdit.setOnKeyPressed(new EventHandler<KeyEvent>() {
+        textEdit.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
             @Override
             public void handle(KeyEvent event) {
-                if (event.getCode().equals(KeyCode.BACK_SPACE) && !textEdit.getText().equals("")){
+                if (event.getCode().equals(KeyCode.BACK_SPACE) && !textEdit.getText().equals("") ){
                     testEffacer = true;
-
                 }
                 if(textEdit.getText().equals(""))
                 {
@@ -99,53 +98,54 @@ public class Controleur {
                 }
                 if (event.getCode().equals(KeyCode.DELETE) && !textEdit.getText().equals("") ){
                     event.consume();
-                    System.out.println("delete");
                 }
             }
         });
 
         textEdit.textProperty().addListener(new ChangeListener<String>() {
-        @Override
-        public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
-            if(!concreteEnregistreur.isReplay()){
-                curseur = textEdit.getCaretPosition();
+            @Override
+            public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
+                if(!concreteEnregistreur.isReplay()){
+                    curseur = textEdit.getCaretPosition();
 
-                if (!testEffacer && !testCouper && !testColler){
-                    curseur = textEdit.getCaretPosition();
-                    setText(newValue.substring(curseur, curseur+1));
-                    moteurEdition.getBuffer().setCurseur(curseur);
-                    if(concreteEnregistreur.isRecording())
-                    { invoker = new InvokerImplementation(insererTexteEnregistrable);
+                    if (!testEffacer && !testCouper && !testColler){
+                        curseur = textEdit.getCaretPosition();
+                        setText(newValue.substring(curseur, curseur+1));
+                        moteurEdition.getBuffer().setCurseur(curseur);
+                        if(concreteEnregistreur.isRecording())
+                        {
+                            invoker = new InvokerImplementation(insererTexteEnregistrable);
+                        }
+                        else{
+                            invoker = new InvokerImplementation(insererTexte);
+                        }
+                        invoker.InvokeCommande();
+                        textEdit.positionCaret(moteurEdition.getBuffer().getCurseur());
+                        textEdit.setText(moteurEdition.getBuffer().getZoneTexte());
                     }
-                    else{
-                        invoker = new InvokerImplementation(insererTexte);
+                    else if(testEffacer &&  curseur > 0){
+                        if(concreteEnregistreur.isRecording())
+                        {
+                            commande = new CommandeEnregistrableEffacer(moteurEdition, concreteEnregistreur);
+                        }
+                        else{
+                            commande = new Effacer(moteurEdition);
+                        }
+                        curseur = textEdit.getCaretPosition();
+                        moteurEdition.getBuffer().setCurseur(curseur);
+                        invoker = new InvokerImplementation(commande);
+                        invoker.InvokeCommande();
+                        testEffacer = true;
+                        textEdit.positionCaret(moteurEdition.getBuffer().getCurseur());
+                        textEdit.setText(moteurEdition.getBuffer().getZoneTexte());
                     }
-                    invoker.InvokeCommande();
-                    textEdit.positionCaret(moteurEdition.getBuffer().getCurseur());
-                    textEdit.setText(moteurEdition.getBuffer().getZoneTexte());
+                    testEffacer = false;
+                    testCouper = false;
+                    testColler = false;
                 }
-                else if(testEffacer &&  curseur > 0){
-                    if(concreteEnregistreur.isRecording())
-                    {
-                        commande = new CommandeEnregistrableEffacer(moteurEdition, concreteEnregistreur);
-                    }
-                    else{
-                        commande = new Effacer(moteurEdition);
-                    }
-                    curseur = textEdit.getCaretPosition();
-                    moteurEdition.getBuffer().setCurseur(curseur);
-                    invoker = new InvokerImplementation(commande);
-                    invoker.InvokeCommande();
-                    testEffacer = true;
-                    textEdit.positionCaret(moteurEdition.getBuffer().getCurseur());
-                    textEdit.setText(moteurEdition.getBuffer().getZoneTexte());
-                }
-                testEffacer = false;
-                testCouper = false;
-                testColler = false;
             }
-        }
-    });
+
+        });
         buttonCopier.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
