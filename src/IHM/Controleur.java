@@ -86,29 +86,29 @@ public class Controleur {
             }
         });
 
+        textEdit.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode().equals(KeyCode.BACK_SPACE) && !textEdit.getText().equals("")){
+                    testEffacer = true;
+
+                }
+                if(textEdit.getText().equals(""))
+                {
+                    textEdit.positionCaret(0);
+                }
+                if (event.getCode().equals(KeyCode.DELETE) && !textEdit.getText().equals("") ){
+                    event.consume();
+                    System.out.println("delete");
+                }
+            }
+        });
+
         textEdit.textProperty().addListener(new ChangeListener<String>() {
         @Override
         public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
             if(!concreteEnregistreur.isReplay()){
                 curseur = textEdit.getCaretPosition();
-                textEdit.setOnKeyPressed(new EventHandler<KeyEvent>() {
-                    @Override
-                    public void handle(KeyEvent event) {
-                        if (event.getCode().equals(KeyCode.BACK_SPACE) && !textEdit.getText().equals("")){
-                            testEffacer = true;
-
-                        }
-                        if(textEdit.getText().equals(""))
-                        {
-                            textEdit.positionCaret(0);
-                        }
-                        if (event.getCode().equals(KeyCode.DELETE) && !textEdit.getText().equals("") ){
-                            event.consume();
-                            System.out.println("delete");
-                        }
-                    }
-                });
-
 
                 if (!testEffacer && !testCouper && !testColler){
                     curseur = textEdit.getCaretPosition();
