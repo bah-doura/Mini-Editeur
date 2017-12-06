@@ -74,7 +74,6 @@ public class ConcreteEnregistreur implements Enregistreur {
             it.next().getValue().execute();
             this.index++;
         }
-        this.saveCommandes.clear();
         index = 0;
     }
 
