@@ -73,33 +73,29 @@ public class Controleur {
             }
         });
 
+        textEdit.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode().equals(KeyCode.BACK_SPACE) && !textEdit.getText().equals("") ){
+                    testEffacer = true;
+                }
+                if(textEdit.getText().equals(""))
+                {
+                    textEdit.positionCaret(0);
+                }
+                if (event.getCode().equals(KeyCode.DELETE) && !textEdit.getText().equals("") ){
+                    event.consume();
+                }
+            }
+        });
+
         textEdit.textProperty().addListener(new ChangeListener<String>() {
         @Override
         public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
             if(!isDefaireRefaire){
                 saveInGestDefRefaire();
                 curseur = textEdit.getCaretPosition();
-                textEdit.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
-                    @Override
-                    public void handle(KeyEvent event) {
-                        if (event.getCode().equals(KeyCode.BACK_SPACE) && !textEdit.getText().equals("") ){
-                            testEffacer = true;
-                        }
-                        if(textEdit.getText().equals(""))
-                        {
-                            textEdit.positionCaret(0);
-                        }
-                    }
-                });
-                textEdit.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
-                    @Override
-                    public void handle(KeyEvent event) {
-                        if (event.getCode().equals(KeyCode.DELETE) && !textEdit.getText().equals("") ){
-                            event.consume();
-                        }
 
-                    }
-                });
                 if (!testEffacer && !testCouper && !testColler){
                     curseur = textEdit.getCaretPosition();
                     setText(newValue.substring(curseur, curseur+1));
