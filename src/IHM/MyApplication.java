@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -30,6 +31,8 @@ public class MyApplication extends Application {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MyApplication.class.getResource("/IHM/Application.fxml"));
             rootLayout = (AnchorPane) loader.load();
+
+            primaryStage.getIcons().add(new Image(getClass().getResource("/style/icone.png").toExternalForm()));
 
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
